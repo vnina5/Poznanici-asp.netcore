@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TPSPoznanici.props" />
+</Project>
