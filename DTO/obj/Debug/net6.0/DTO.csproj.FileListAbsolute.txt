@@ -9,3 +9,4 @@ C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\DTO\obj\Debug\ne
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\DTO\obj\Debug\net6.0\refint\DTO.dll
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\DTO\obj\Debug\net6.0\DTO.pdb
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\DTO\obj\Debug\net6.0\ref\DTO.dll
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\DTO\obj\Debug\net6.0\DTO.sourcelink.json

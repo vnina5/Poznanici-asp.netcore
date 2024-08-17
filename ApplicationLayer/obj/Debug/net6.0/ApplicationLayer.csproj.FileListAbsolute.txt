@@ -19,3 +19,6 @@ C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\obj\Debug\net6.0\refint\ApplicationLayer.dll
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\obj\Debug\net6.0\ApplicationLayer.pdb
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\obj\Debug\net6.0\ref\ApplicationLayer.dll
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\bin\Debug\net6.0\Common.dll
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\bin\Debug\net6.0\Common.pdb
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\ApplicationLayer\obj\Debug\net6.0\ApplicationLayer.sourcelink.json

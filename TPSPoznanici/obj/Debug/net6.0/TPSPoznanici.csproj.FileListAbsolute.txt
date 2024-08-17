@@ -95,3 +95,6 @@ C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\bin
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\bin\Debug\net6.0\System.Text.Json.dll
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\obj\Debug\net6.0\TPSPoznanici.MvcApplicationPartsAssemblyInfo.cs
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\bin\Debug\net6.0\Common.dll
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\bin\Debug\net6.0\Common.pdb
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\TPSPoznanici\obj\Debug\net6.0\TPSPoznanici.sourcelink.json

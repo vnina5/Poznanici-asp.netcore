@@ -1066,6 +1066,20 @@
           }
         }
       },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DTO": "1.0.0",
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
+        }
+      },
       "DataAccessLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3349,6 +3363,11 @@
         "version.txt"
       ]
     },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../Common/Common.csproj",
+      "msbuildProject": "../Common/Common.csproj"
+    },
     "DataAccessLayer/1.0.0": {
       "type": "project",
       "path": "../DataAccessLayer/DataAccessLayer.csproj",
@@ -3372,6 +3391,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Common >= 1.0.0",
       "DTO >= 1.0.0",
       "DataAccessLayer >= 1.0.0",
       "Mapper >= 1.0.0"
@@ -3405,6 +3425,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Master\\Testiranje i performanse softvera\\Domaci\\TPSPoznanici\\Common\\Common.csproj": {
+              "projectPath": "C:\\Master\\Testiranje i performanse softvera\\Domaci\\TPSPoznanici\\Common\\Common.csproj"
+            },
             "C:\\Master\\Testiranje i performanse softvera\\Domaci\\TPSPoznanici\\DataAccessLayer\\DataAccessLayer.csproj": {
               "projectPath": "C:\\Master\\Testiranje i performanse softvera\\Domaci\\TPSPoznanici\\DataAccessLayer\\DataAccessLayer.csproj"
             },

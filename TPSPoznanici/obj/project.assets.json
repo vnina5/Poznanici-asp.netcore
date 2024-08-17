@@ -1157,6 +1157,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Common": "1.0.0",
           "DTO": "1.0.0",
           "DataAccessLayer": "1.0.0",
           "Mapper": "1.0.0"
@@ -1166,6 +1167,20 @@
         },
         "runtime": {
           "bin/placeholder/ApplicationLayer.dll": {}
+        }
+      },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DTO": "1.0.0",
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
         }
       },
       "DataAccessLayer/1.0.0": {
@@ -3803,6 +3818,11 @@
       "type": "project",
       "path": "../ApplicationLayer/ApplicationLayer.csproj",
       "msbuildProject": "../ApplicationLayer/ApplicationLayer.csproj"
+    },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../Common/Common.csproj",
+      "msbuildProject": "../Common/Common.csproj"
     },
     "DataAccessLayer/1.0.0": {
       "type": "project",

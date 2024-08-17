@@ -1,4 +1,6 @@
 ﻿using ApplicationLayer.Interfaces;
+using Common.Exceptions;
+using Common.Validators;
 using DataAccessLayer.UnitOfWork;
 using Domain.Entity;
 using DTO;
@@ -16,17 +18,23 @@ namespace ApplicationLayer.Implementation
         private readonly IUnitOfWork unit;
         private readonly OsobaMapper mapper;
         private readonly MestoMapper mestoMapper;
+        private readonly OsobaValidator validator;
+        private readonly MestoValidator mestoValidator;
 
         public OsobaService(IUnitOfWork unit)
         {
             this.unit = unit;
             this.mapper = new OsobaMapper();
             this.mestoMapper = new MestoMapper();
+            this.validator = new OsobaValidator();
+            this.mestoValidator = new MestoValidator();
         }
 
         public void DeleteById(long id)
         {
             Osoba osoba = unit.OsobaRepository.Get(id);
+            validator.ValidateNullOrEmpty(osoba);
+
             unit.OsobaRepository.Delete(osoba);
             unit.SaveChanges();
         }
@@ -34,8 +42,9 @@ namespace ApplicationLayer.Implementation
         public List<OsobaDTO> GetAll()
         {
             List<Osoba> osobe = unit.OsobaRepository.GetAll();
+            validator.ValidateNullOrEmptyList(osobe);
+
             List<OsobaDTO> osobeDTO = new List<OsobaDTO>();
-            
             osobe.ForEach(o =>
             {
                 osobeDTO.Add(mapper.EntityToDto(o));
@@ -47,12 +56,22 @@ namespace ApplicationLayer.Implementation
         public OsobaDTO GetById(long id)
         {
             Osoba osoba = unit.OsobaRepository.Get(id);
+            validator.ValidateNullOrEmpty(osoba);
+
             OsobaDTO osobaDTO = mapper.EntityToDto(osoba);
             return osobaDTO;
         }
 
         public OsobaDTO Save(OsobaDTO dto)
-        {
+        {            
+            validator.ValidateNullOrEmpty(dto);
+            validator.ValidateForSave(dto);
+
+            Mesto mestoRodjenja = unit.MestoRepository.Get(dto.MestoRodjenjaId);
+            Mesto prebivaliste = unit.MestoRepository.Get(dto.PrebivalisteId);
+            mestoValidator.ValidateNullOrEmpty(mestoRodjenja);
+            mestoValidator.ValidateNullOrEmpty(prebivaliste);
+
             Osoba osoba = mapper.DtoToEntity(dto);
             unit.OsobaRepository.Add(osoba);
             unit.SaveChanges();
@@ -63,10 +82,19 @@ namespace ApplicationLayer.Implementation
         public OsobaDTO UpdateById(long id, OsobaDTO dto)
         {
             Osoba osoba = unit.OsobaRepository.Get(id);
+            validator.ValidateNullOrEmpty(osoba);
+
+            validator.ValidateNullOrEmpty(dto);
+            validator.ValidateForSave(dto);
+            
             osoba.Ime = (dto.Ime ?? osoba.Ime); //nije dobro, upise ""
             osoba.Prezime = dto.Prezime;
             osoba.Visina = (dto.Visina != 0 ? dto.Visina : osoba.Visina); //dobro
-            osoba.PrebivalisteId =dto.PrebivalisteId;
+
+            Mesto prebivaliste = unit.MestoRepository.Get(dto.PrebivalisteId);
+            mestoValidator.ValidateNullOrEmpty(prebivaliste);
+            osoba.PrebivalisteId = dto.PrebivalisteId;
+            osoba.Prebivaliste = prebivaliste;
 
             unit.OsobaRepository.Update(osoba);
             unit.SaveChanges();
@@ -92,8 +120,9 @@ namespace ApplicationLayer.Implementation
         public List<OsobaDTO> GetAllPunoletni()
         {
             List<Osoba> osobe = unit.OsobaRepository.GetAllPunoletni();
-            List<OsobaDTO> osobeDTO = new List<OsobaDTO>();
+            validator.ValidateNullOrEmptyList(osobe);
 
+            List<OsobaDTO> osobeDTO = new List<OsobaDTO>();
             osobe.ForEach(o =>
             {
                 osobeDTO.Add(mapper.EntityToDto(o));
@@ -105,8 +134,9 @@ namespace ApplicationLayer.Implementation
         public List<OsobaDTO> GetAllSmederevci()
         {
             List<Osoba> osobe = unit.OsobaRepository.GetAllSmederevci();
-            List<OsobaDTO> osobeDTO = new List<OsobaDTO>();
+            validator.ValidateNullOrEmptyList(osobe);
 
+            List<OsobaDTO> osobeDTO = new List<OsobaDTO>();
             osobe.ForEach(o =>
             {
                 osobeDTO.Add(mapper.EntityToDto(o));

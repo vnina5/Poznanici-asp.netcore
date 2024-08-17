@@ -12,3 +12,4 @@ C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\Domain\obj\Debug
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\Domain\obj\Debug\net6.0\Domain.pdb
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
 C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\Domain\obj\Debug\net6.0\ref\Domain.dll
+C:\Master\Testiranje i performanse softvera\Domaci\TPSPoznanici\Domain\obj\Debug\net6.0\Domain.sourcelink.json
