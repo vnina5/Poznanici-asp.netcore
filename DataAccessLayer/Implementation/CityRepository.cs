@@ -10,7 +10,7 @@ namespace DataAccessLayer.Implementation
 
         public CityRepository(MyContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void Add(City entity)
@@ -23,7 +23,7 @@ namespace DataAccessLayer.Implementation
             _context.City.Remove(entity);
         }
 
-        public City Get(long id)
+        public City Get(int id)
         {
             return _context.City.Find(id);
         }

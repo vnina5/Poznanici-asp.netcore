@@ -36,7 +36,7 @@ namespace TPSPoznanici.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetById([FromRoute] long id)
+        public IActionResult GetById([FromRoute] int id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace TPSPoznanici.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update([FromRoute] long id, [FromBody] PersonDTO dto)
+        public IActionResult Update([FromRoute] int id, [FromBody] PersonDTO dto)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace TPSPoznanici.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete([FromRoute] long id)
+        public IActionResult Delete([FromRoute] int id)
         {
             try
             {

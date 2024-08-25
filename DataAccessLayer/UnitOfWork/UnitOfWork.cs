@@ -6,15 +6,19 @@ namespace DataAccessLayer.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly Domain.Context.MyContext _context;
-        public IPersonRepository OsobaRepository { get; set; }
-        public ICityRepository MestoRepository { get; set; }
+        private readonly MyContext _context;
+        public IPersonRepository PersonRepository { get; set; }
+        public ICityRepository CityRepository { get; set; }
+        public IAddressRepository AddressRepository { get; set; }
+        public IHomeTypeRepository HomeTypeRepository { get; set; }
 
-        public UnitOfWork(Domain.Context.MyContext context)
+        public UnitOfWork(MyContext context)
         {
             _context = context;
-            this.OsobaRepository = new PersonRepository(context);
-            this.MestoRepository = new CityRepository(context);
+            this.PersonRepository = new PersonRepository(context);
+            this.CityRepository = new CityRepository(context);
+            this.AddressRepository = new AddressRepository(context);
+            this.HomeTypeRepository = new HomeTypeRepository(context);
         }
 
         public void SaveChanges()

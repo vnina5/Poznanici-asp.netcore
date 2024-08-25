@@ -29,12 +29,12 @@ namespace Domain.Entity
         public virtual City CityOfBirth { get; set; }
 
 
-        public int AddresId { get; set; }
-        [ForeignKey("AddresId")]
-        public virtual City? Addres { get; set; }
+        public int AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
 
 
-        public Person(string firstName, string lastName, int jmbg, int cityOfBirthId, int addresId, DateOnly? dateOfBirth = null, int? height = null)
+        public Person(string firstName, string lastName, int jmbg, int cityOfBirthId, int addressId, DateOnly? dateOfBirth = null, int? height = null)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -42,7 +42,7 @@ namespace Domain.Entity
             DateOfBirth = dateOfBirth;
             Height = height;
             CityOfBirthId = cityOfBirthId;
-            AddresId = addresId;
+            AddressId = addressId;
         }
 
 

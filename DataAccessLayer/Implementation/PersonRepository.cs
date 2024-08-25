@@ -24,15 +24,15 @@ namespace DataAccessLayer.Implementation
             _context.Person.Remove(entity);
         }
 
-        public Person Get(long id)
+        public Person Get(int id)
         {
-            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Addres).SingleOrDefault(o => o.Id == id);
+            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Address).SingleOrDefault(o => o.Id == id);
             //return context.Osoba.Find(id);
         }
 
         public List<Person> GetAll()
         {
-            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Addres).ToList();
+            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Address).ToList();
             //return context.Osoba.ToList();
         }
 

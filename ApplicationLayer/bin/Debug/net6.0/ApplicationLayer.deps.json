@@ -8,10 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "ApplicationLayer/1.0.0": {
         "dependencies": {
-          "Common": "1.0.0",
-          "DTO": "1.0.0",
-          "DataAccessLayer": "1.0.0",
-          "Mapper": "1.0.0"
+          "DataAccessLayer": "1.0.0"
         },
         "runtime": {
           "ApplicationLayer.dll": {}
@@ -642,15 +639,6 @@
           }
         }
       },
-      "Common/1.0.0": {
-        "dependencies": {
-          "DTO": "1.0.0",
-          "Domain": "1.0.0"
-        },
-        "runtime": {
-          "Common.dll": {}
-        }
-      },
       "DataAccessLayer/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0"
@@ -667,20 +655,6 @@
         },
         "runtime": {
           "Domain.dll": {}
-        }
-      },
-      "DTO/1.0.0": {
-        "runtime": {
-          "DTO.dll": {}
-        }
-      },
-      "Mapper/1.0.0": {
-        "dependencies": {
-          "DTO": "1.0.0",
-          "Domain": "1.0.0"
-        },
-        "runtime": {
-          "Mapper.dll": {}
         }
       }
     }
@@ -1125,27 +1099,12 @@
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
     },
-    "Common/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "DataAccessLayer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "Domain/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DTO/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Mapper/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

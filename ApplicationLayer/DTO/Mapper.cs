@@ -8,7 +8,7 @@ namespace ApplicationLayer.DTO
 
         public Person DtoToPerson(PersonDTO dto)
         {
-            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddresId, dto.DateOfBirth, dto.Height);
+            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddressId, dto.DateOfBirth, dto.Height);
         }
 
         public PersonDTO PersonToDto(Person person)
@@ -22,7 +22,7 @@ namespace ApplicationLayer.DTO
                 AgeInMonths = person.AgeInMonths,
                 Height = person.Height,
                 CityOfBirthId = person.CityOfBirthId,
-                AddresId = person.AddresId,
+                AddressId = person.AddressId,
             };
         }
 
@@ -38,6 +38,53 @@ namespace ApplicationLayer.DTO
                 Name = city.Name,
                 ZipCode = city.ZipCode,
                 NumberOfCitizens = city.NumberOfCitizens,
+            };
+        }
+
+        public Address DtoToAddress(AddressDTO dto)
+        {
+            return new Address(dto.Street, dto.Number, dto.CityId, dto.HomeTypeId, dto.Floor);
+        }
+
+        public AddressDTO AddressToDto(Address address)
+        {
+            return new AddressDTO
+            {
+                Street = address.Street,
+                Number = address.Number,
+                Floor = address.Floor,
+                CityId = address.CityId,
+                HomeTypeId = address.HomeTypeId,
+                HomeTypeName = address.HomeType.Name
+            };
+        }
+
+        public Person DtoToPersonAddress(PersonAddressDTO dto)
+        {
+            Person person = new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddressId, dto.DateOfBirth, dto.Height);
+            Address address = new Address(dto.AddressStreet, dto.AddressNumber, dto.AddressCityId, dto.HomeTypeId, dto.AddressFloor);
+            person.Address = address;
+            return person;
+        }
+
+        public PersonAddressDTO PersonAddressToDto(Person person)
+        {
+            return new PersonAddressDTO
+            {
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                JMBG = person.JMBG,
+                DateOfBirth = person.DateOfBirth,
+                AgeInMonths = person.AgeInMonths,
+                Height = person.Height,
+                CityOfBirthId = person.CityOfBirthId,
+                AddressId = person.AddressId,
+                AddressStreet = person.Address.Street,
+                AddressNumber = person.Address.Number,
+                AddressFloor = person.Address.Floor,
+                AddressCityId = person.Address.CityId,
+                HomeTypeId = person.Address.HomeTypeId,
+                HomeTypeName = person.Address.HomeType.Name
             };
         }
 

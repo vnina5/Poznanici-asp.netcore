@@ -16,18 +16,18 @@ namespace ApplicationLayer.Implementation
             _mapper = new Mapper();
         }
 
-        public void DeleteById(long id)
+        public void DeleteById(int id)
         {
-            City city = _unit.MestoRepository.Get(id);
+            City city = _unit.CityRepository.Get(id);
             //validator.ValidateNullOrEmpty(mesto);
 
-            _unit.MestoRepository.Delete(city);
+            _unit.CityRepository.Delete(city);
             _unit.SaveChanges();
         }
 
         public List<CityDTO> GetAll()
         {
-            List<City> cities = _unit.MestoRepository.GetAll();
+            List<City> cities = _unit.CityRepository.GetAll();
             List<CityDTO> citiesDTO = new List<CityDTO>();
 
             cities.ForEach(c =>
@@ -38,9 +38,9 @@ namespace ApplicationLayer.Implementation
             return citiesDTO;
         }
 
-        public CityDTO GetById(long id)
+        public CityDTO GetById(int id)
         {
-            City city = _unit.MestoRepository.Get(id);
+            City city = _unit.CityRepository.Get(id);
             //validator.ValidateNullOrEmpty(mesto);
 
             return _mapper.CityToDto(city);
@@ -49,21 +49,21 @@ namespace ApplicationLayer.Implementation
         public CityDTO Save(CityDTO dto)
         {
             City city = _mapper.DtoToCity(dto);
-            _unit.MestoRepository.Add(city);
+            _unit.CityRepository.Add(city);
             _unit.SaveChanges();
 
             return dto;
         }
 
-        public CityDTO UpdateById(long id, CityDTO dto)
+        public CityDTO UpdateById(int id, CityDTO dto)
         {
-            City city = _unit.MestoRepository.Get(id);
+            City city = _unit.CityRepository.Get(id);
             //validator.ValidateNullOrEmpty(mesto);
 
             city.Name = dto.Name;
             city.NumberOfCitizens = dto.NumberOfCitizens;
 
-            _unit.MestoRepository.Update(city);
+            _unit.CityRepository.Update(city);
             _unit.SaveChanges();
 
             return dto;

@@ -16,18 +16,18 @@ namespace ApplicationLayer.Implementation
             _mapper = mapper;
         }
 
-        public void DeleteById(long id)
+        public void DeleteById(int id)
         {
-            Person osoba = _unit.OsobaRepository.Get(id);
+            Person person = _unit.PersonRepository.Get(id);
             //validator.ValidateNullOrEmpty(osoba);
 
-            _unit.OsobaRepository.Delete(osoba);
+            _unit.PersonRepository.Delete(person);
             _unit.SaveChanges();
         }
 
         public List<PersonDTO> GetAll()
         {
-            List<Person> persons = _unit.OsobaRepository.GetAll();
+            List<Person> persons = _unit.PersonRepository.GetAll();
             //validator.ValidateNullOrEmptyList(osobe);
 
             List<PersonDTO> personsDTO = new List<PersonDTO>();
@@ -39,61 +39,96 @@ namespace ApplicationLayer.Implementation
             return personsDTO;
         }
 
-        public PersonDTO GetById(long id)
+        public PersonDTO GetById(int id)
         {
-            Person person = _unit.OsobaRepository.Get(id);
+            Person person = _unit.PersonRepository.Get(id);
             //validator.ValidateNullOrEmpty(osoba);
 
             PersonDTO personDTO = _mapper.PersonToDto(person);
             return personDTO;
         }
 
+        public PersonAddressDTO GetPersonAddressById(int id)
+        {
+            Person person = _unit.PersonRepository.Get(id);
+            person.Address = _unit.AddressRepository.Get(person.AddressId);
+            person.Address.HomeType = _unit.HomeTypeRepository.Get(person.Address.HomeTypeId);
+            //validator
+
+            PersonAddressDTO dto = _mapper.PersonAddressToDto(person);
+            return dto;
+        }
+
         public PersonDTO Save(PersonDTO dto)
         {            
-            City cityOfBirth = _unit.MestoRepository.Get(dto.CityOfBirthId);
-            City? addres = _unit.MestoRepository.Get(dto.AddresId);
+            City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
+            Address addres = _unit.AddressRepository.Get(dto.AddressId);
             //mestoValidator.ValidateNullOrEmpty(mestoRodjenja);
+            //mestoValidator.ValidateNullOrEmpty(addres);
 
             Person person = _mapper.DtoToPerson(dto);
-            _unit.OsobaRepository.Add(person);
+            _unit.PersonRepository.Add(person);
             _unit.SaveChanges();
 
             return dto;
         }
 
-        public PersonDTO UpdateById(long id, PersonDTO dto)
+        public PersonAddressDTO Save(PersonAddressDTO dto)
         {
-            Person person = _unit.OsobaRepository.Get(id);
+            City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
+            Address addres = _unit.AddressRepository.Get(dto.AddressId);
+            //proverim da li postoji cityId
+            //proverim da li postoji addressId
+            //proverim da li je address(vraceni) == person.Address
+            //proverim da li postoji homeTypeId
+
+            Person person = _mapper.DtoToPersonAddress(dto);
+            _unit.PersonRepository.Add(person);
+            _unit.AddressRepository.Add(person.Address);
+            //cuva se person i address istovremeno pod transakcijom!!!
+            _unit.SaveChanges();
+
+            return dto;
+        }
+
+        public PersonDTO UpdateById(int id, PersonDTO dto)
+        {
+            Person person = _unit.PersonRepository.Get(id);
             //validator.ValidateNullOrEmpty(osoba);
 
-            City? addres = _unit.MestoRepository.Get(dto.AddresId);
-            person.AddresId = dto.AddresId;
-            person.Addres = addres;
+            //Address addres = _unit.MestoRepository.Get(dto.AddressId);
+            //person.AddressId = dto.AddressId;
+            //person.Address = addres;
 
-            _unit.OsobaRepository.Update(person);
+            _unit.PersonRepository.Update(person);
             _unit.SaveChanges();
 
             PersonDTO personDTO = _mapper.PersonToDto(person);
             return personDTO;
         }
 
+        public PersonAddressDTO Update(int id, PersonAddressDTO dto)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public int GetMaxHeight()
         {
-            int maxHeight = _unit.OsobaRepository.GetMaxHeight();
+            int maxHeight = _unit.PersonRepository.GetMaxHeight();
             return maxHeight;
         }
 
         public int GetAverageAge()
         {
-            int averageAge = _unit.OsobaRepository.GetAverageAge();
+            int averageAge = _unit.PersonRepository.GetAverageAge();
             return averageAge;
         }
 
 
         public List<PersonDTO> GetAllAdults()
         {
-            List<Person> adults = _unit.OsobaRepository.GetAllAdults();
+            List<Person> adults = _unit.PersonRepository.GetAllAdults();
             //validator.ValidateNullOrEmptyList(osobe);
 
             List<PersonDTO> dto = new List<PersonDTO>();
@@ -107,7 +142,7 @@ namespace ApplicationLayer.Implementation
 
         public List<PersonDTO> GetAllFromSmederevo()
         {
-            List<Person> persons = _unit.OsobaRepository.GetAllFromSmederevo();
+            List<Person> persons = _unit.PersonRepository.GetAllFromSmederevo();
             //validator.ValidateNullOrEmptyList(osobe);
 
             List<PersonDTO> dto = new List<PersonDTO>();

@@ -11,6 +11,6 @@
 
         public int CityOfBirthId { get; set; }
 
-        public int AddresId { get; set; }
+        public int AddressId { get; set; }
     }
 }

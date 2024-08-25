@@ -13,6 +13,8 @@ namespace Domain.Context
 
         public DbSet<Person> Person {  get; set; }
         public DbSet<City> City { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<HomeType> HomeType { get; set; }
 
         public DbSet<Person> AdultView { get; set; }
 
@@ -28,6 +30,8 @@ namespace Domain.Context
 
             builder.Entity<Person>().ToTable("Person");
             builder.Entity<City>().ToTable("City");
+            builder.Entity<Address>().ToTable("Address");
+            builder.Entity<HomeType>().ToTable("HomeType");
 
             //builder.Entity<Osoba>().HasOne(o => o.MestoRodjenja).WithMany(m => m.Rodjeni).HasForeignKey(o => o.MestoRodjenjaId);
             //builder.Entity<Osoba>().HasOne(o => o.Prebivaliste).WithMany(m => m.Zive).HasForeignKey(o => o.PrebivalisteId);
