@@ -3,7 +3,6 @@ using ApplicationLayer.Implementation;
 using DataAccessLayer.UnitOfWork;
 using Domain.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IOsobaService, OsobaService>();
-builder.Services.AddScoped<IMestoService, MestoService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddDbContext<PoznaniciContext>(options =>
+builder.Services.AddDbContext<MyContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("base"));
 });

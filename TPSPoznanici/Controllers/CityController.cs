@@ -1,20 +1,20 @@
 ﻿using ApplicationLayer.DTO;
 using ApplicationLayer.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TPSPoznanici.Controllers
 {
-    [Route("mesta/")]
+    [Route("cities/")]
     [ApiController]
-    public class MestoController : ControllerBase
+    public class CityController : ControllerBase
     {
-        private readonly IMestoService mestoService;
+        private readonly ICityService _cityService;
 
-        public MestoController(IMestoService mestoService)
+        public CityController(ICityService cityService)
         {
-            this.mestoService = mestoService;
+            this._cityService = cityService;
         }
+
 
         [HttpGet]
         [Route("")]
@@ -22,13 +22,14 @@ namespace TPSPoznanici.Controllers
         {
             try
             {
-                return Ok(mestoService.GetAll());
+                return Ok(_cityService.GetAll());
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
 
         [HttpGet]
         [Route("{id}")]
@@ -36,7 +37,7 @@ namespace TPSPoznanici.Controllers
         {
             try
             {
-                return Ok(mestoService.GetById(id));
+                return Ok(_cityService.GetById(id));
             }
             catch (Exception ex)
             {
@@ -44,13 +45,14 @@ namespace TPSPoznanici.Controllers
             }
         }
 
+
         [HttpPost]
-        [Route("novo")]
-        public IActionResult Save([FromBody] MestoDTO dto)
+        [Route("")]
+        public IActionResult Save([FromBody] CityDTO dto)
         {
             try
             {
-                return Ok(mestoService.Save(dto));
+                return Ok(_cityService.Save(dto));
             }
             catch (Exception ex)
             {
@@ -61,11 +63,11 @@ namespace TPSPoznanici.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult UpdateById([FromRoute] long id, [FromBody] MestoDTO dto)
+        public IActionResult UpdateById([FromRoute] long id, [FromBody] CityDTO dto)
         {
             try
             {
-                return Ok(mestoService.UpdateById(id, dto));
+                return Ok(_cityService.UpdateById(id, dto));
             }
             catch (Exception ex)
             {
@@ -80,7 +82,7 @@ namespace TPSPoznanici.Controllers
         {
             try
             {
-                mestoService.DeleteById(id);
+                _cityService.DeleteById(id);
                 return Ok();
             }
             catch (Exception ex)

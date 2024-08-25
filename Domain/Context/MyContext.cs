@@ -1,25 +1,20 @@
 ﻿using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Context
 {
-    public class PoznaniciContext : DbContext
+    public class MyContext : DbContext
     {
-        public PoznaniciContext([NotNull] DbContextOptions options) : base(options)
+        public MyContext([NotNull] DbContextOptions options) : base(options)
         {
 
         }
 
-        public DbSet<Osoba> Osoba {  get; set; }
-        public DbSet<Mesto> Mesto { get; set; }
+        public DbSet<Person> Person {  get; set; }
+        public DbSet<City> City { get; set; }
 
-        public DbSet<Osoba> PunoletniView { get; set; }
+        public DbSet<Person> AdultView { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,8 +26,8 @@ namespace Domain.Context
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Osoba>().ToTable("Osoba");
-            builder.Entity<Mesto>().ToTable("Mesto");
+            builder.Entity<Person>().ToTable("Person");
+            builder.Entity<City>().ToTable("City");
 
             //builder.Entity<Osoba>().HasOne(o => o.MestoRodjenja).WithMany(m => m.Rodjeni).HasForeignKey(o => o.MestoRodjenjaId);
             //builder.Entity<Osoba>().HasOne(o => o.Prebivaliste).WithMany(m => m.Zive).HasForeignKey(o => o.PrebivalisteId);

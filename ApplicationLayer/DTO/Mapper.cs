@@ -1,9 +1,4 @@
 ﻿using Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLayer.DTO
 {
@@ -11,38 +6,38 @@ namespace ApplicationLayer.DTO
     {
         public Mapper() { }
 
-        public Osoba DtoToOsoba(OsobaDTO dto)
+        public Person DtoToPerson(PersonDTO dto)
         {
-            return new Osoba(dto.Ime, dto.Prezime, dto.JMBG, dto.MestoRodjenjaId, dto.PrebivalisteId, dto.DatumRodjenja, dto.Visina);
+            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddresId, dto.DateOfBirth, dto.Height);
         }
 
-        public OsobaDTO OsobaToDto(Osoba osoba)
+        public PersonDTO PersonToDto(Person person)
         {
-            return new OsobaDTO
+            return new PersonDTO
             {
-                Ime = osoba.Ime,
-                Prezime = osoba.Prezime,
-                JMBG = osoba.JMBG,
-                DatumRodjenja = osoba.DatumRodjenja,
-                Starost = osoba.StarostUMesecima,
-                Visina = osoba.Visina,
-                MestoRodjenjaId = osoba.MestoRodjenjaId,
-                PrebivalisteId = osoba.PrebivalisteId,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                JMBG = person.JMBG,
+                DateOfBirth = person.DateOfBirth,
+                AgeInMonths = person.AgeInMonths,
+                Height = person.Height,
+                CityOfBirthId = person.CityOfBirthId,
+                AddresId = person.AddresId,
             };
         }
 
-        public Mesto DtoToMesto(MestoDTO dto)
+        public City DtoToCity(CityDTO dto)
         {
-            return new Mesto(dto.PttBroj, dto.Naziv, dto.BrojStanovnika);
+            return new City(dto.ZipCode, dto.Name, dto.NumberOfCitizens);
         }
 
-        public MestoDTO MestoToDto(Mesto mesto)
+        public CityDTO CityToDto(City city)
         {
-            return new MestoDTO
+            return new CityDTO
             {
-                Naziv = mesto.Naziv,
-                PttBroj = mesto.PttBroj,
-                BrojStanovnika = mesto.BrojStanovnika,
+                Name = city.Name,
+                ZipCode = city.ZipCode,
+                NumberOfCitizens = city.NumberOfCitizens,
             };
         }
 

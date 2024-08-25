@@ -12,7 +12,7 @@ namespace Common.Validators
 {
     public class MestoValidator
     {
-        public void ValidateNullOrEmpty(Mesto mesto)
+        public void ValidateNullOrEmpty(City mesto)
         {
             if (mesto == null) throw new NotFoundException("Mesto nije pronadjeno.");
         }

@@ -1,30 +1,25 @@
 ﻿using DataAccessLayer.Implementation;
 using DataAccessLayer.Interfaces;
 using Domain.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly PoznaniciContext context;
-        public IOsobaRepository OsobaRepository { get; set; }
-        public IMestoRepository MestoRepository { get; set; }
+        private readonly Domain.Context.MyContext _context;
+        public IPersonRepository OsobaRepository { get; set; }
+        public ICityRepository MestoRepository { get; set; }
 
-        public UnitOfWork(PoznaniciContext context)
+        public UnitOfWork(Domain.Context.MyContext context)
         {
-            this.context = context;
-            this.OsobaRepository = new OsobaRepository(context);
-            this.MestoRepository = new MestoRepository(context);
+            _context = context;
+            this.OsobaRepository = new PersonRepository(context);
+            this.MestoRepository = new CityRepository(context);
         }
 
         public void SaveChanges()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

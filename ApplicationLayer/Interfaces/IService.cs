@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApplicationLayer.Interfaces
+﻿namespace ApplicationLayer.Interfaces
 {
     public interface IService<TDTO> where TDTO : class
     {
