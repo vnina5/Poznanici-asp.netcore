@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace Mapper
 {
-    public class OsobaMapper : IGenericMapper<OsobaDTO, Osoba>
+    public class OsobaMapper 
     {
-        private MestoMapper mestoMapper;
         public OsobaMapper() 
         {
-            mestoMapper = new MestoMapper();
         }
 
         public Osoba DtoToEntity(OsobaDTO dto)

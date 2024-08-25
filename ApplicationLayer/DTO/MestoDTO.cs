@@ -5,25 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entity
+namespace ApplicationLayer.DTO
 {
-    public class Mesto : IEntity
+    public class MestoDTO
     {
-        [Key]
-        public int Id { get; set; }
-
         public int PttBroj { get; set; }
-
         public string Naziv { get; set; }
-
         public int? BrojStanovnika { get; set; }
-
-
-        public Mesto(int pttBroj, string naziv, int? brojStanovnika = null)
-        {
-            PttBroj = pttBroj;
-            Naziv = naziv;
-            BrojStanovnika = brojStanovnika;
-        }
     }
 }

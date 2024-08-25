@@ -24,15 +24,12 @@ namespace Domain.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=Poznanici; Trusted_Connection=True;");
 
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            //builder.Entity<Osoba>().ToView("PunoletniView");
 
             builder.Entity<Osoba>().ToTable("Osoba");
             builder.Entity<Mesto>().ToTable("Mesto");

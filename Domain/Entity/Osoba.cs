@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Primitives;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,58 +13,57 @@ namespace Domain.Entity
     public class Osoba : IEntity
     {
         [Key]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
-
-        [Required(ErrorMessage = "Ime je obavezno polje")]
-        [StringLength(33, ErrorMessage = "Ime moze da ima najvise 33 slova")]
-        [RegularExpression("^[А-ШA-Z][а-шa-zА-ШA-Z]*$", ErrorMessage = "Ime mora da pocne velikim slovom i da sadrzi slova srpske cirilice ili latinice")]
         public string Ime { get; set; }
 
-
-        [Required(ErrorMessage = "Prezime je obavezno polje")]
-        [StringLength(33, ErrorMessage = "Prezime moze da ima najvise 33 slova")]
-        [RegularExpression("^[А-ШA-Z][а-шa-zА-ШA-Z]*$", ErrorMessage = "Prezime mora da pocne velikim slovom i da sadrzi slova srpske cirilice ili latinice")]
         public string Prezime { get; set; }
 
+        public int JMBG { get; set; }
 
-        [Required(ErrorMessage = "JMBG je obavezno polje")]
-        [RegularExpression(@"\d{13}$", ErrorMessage = "JMBG mora da ima 13 cifara")]
-        public string JMBG { get; set; }
+        public DateOnly? DatumRodjenja { get; set; }
 
-
-        [DataType(DataType.Date)]
-        [Range(typeof(DateTime), "1920-01-01", "2023-12-31")]
-        public DateTime DatumRodjenja { get; set; }
-
-
-        public int StarostUMesecima { 
-            get { return IzracunajStarostUMesecima(DatumRodjenja, DateTime.Now); } 
-            set { IzracunajStarostUMesecima(DatumRodjenja, DateTime.Now); } 
+        public int? StarostUMesecima { 
+            get { return IzracunajStarostUMesecima(); } 
+            private set { IzracunajStarostUMesecima(); } 
         }
 
-
-        [Range(50, 250, ErrorMessage = "Visina mora biti u rasponu od 50 do 250cm")]
-        public int Visina { get; set; }
+        public int? Visina { get; set; }
 
 
-        [Required]
-        public long MestoRodjenjaId { get; set; }
-        [Required]
+        public int MestoRodjenjaId { get; set; }
         [ForeignKey("MestoRodjenjaId")]
         public virtual Mesto MestoRodjenja { get; set; }
 
 
-        public long PrebivalisteId { get; set; }
+        public int PrebivalisteId { get; set; }
         [ForeignKey("PrebivalisteId")]
         public virtual Mesto Prebivaliste { get; set; }
 
 
-
-        private int IzracunajStarostUMesecima(DateTime datumRodjenja, DateTime trenutniDatum)
+        public Osoba(string ime, string prezime, int jmbg, int mestoRodjenjaId, int prebivalisteId, DateOnly? datumRodjenja = null, int? visina = null)
         {
-            int starost = (trenutniDatum.Year - datumRodjenja.Year) * 12 + (trenutniDatum.Month - datumRodjenja.Month);
-            if (trenutniDatum.Day < datumRodjenja.Day) starost--;
+            Ime = ime;
+            Prezime = prezime;
+            JMBG = jmbg;
+            DatumRodjenja = datumRodjenja;
+            Visina = visina;
+            MestoRodjenjaId = mestoRodjenjaId;
+            PrebivalisteId = prebivalisteId;
+        }
+
+
+        private int? IzracunajStarostUMesecima()
+        {
+            int? starost = null;
+            if (DatumRodjenja.HasValue)
+            {
+                DateOnly trenutniDatum = DateOnly.FromDateTime(DateTime.Now);
+                DateOnly datumRodjenja = DatumRodjenja.Value;
+                starost = (trenutniDatum.Year - datumRodjenja.Year) * 12 + (trenutniDatum.Month - datumRodjenja.Month);
+                if (trenutniDatum.Day < datumRodjenja.Day) starost--;
+                
+            }
             return starost;
         }
     }

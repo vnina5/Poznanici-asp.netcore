@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class MestoDTO : IDTO
+    public class MestoDTO
     {
-        //public long Id { get; set; }
-        public string PttBroj { get; set; }
+        public int PttBroj { get; set; }
         public string Naziv { get; set; }
         public int BrojStanovnika { get; set; }
     }

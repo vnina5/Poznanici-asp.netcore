@@ -1,9 +1,7 @@
-﻿using ApplicationLayer.Interfaces;
-using Common.Validators;
+﻿using ApplicationLayer.DTO;
+using ApplicationLayer.Interfaces;
 using DataAccessLayer.UnitOfWork;
 using Domain.Entity;
-using DTO;
-using Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +13,20 @@ namespace ApplicationLayer.Implementation
     public class MestoService : IMestoService
     {
         private readonly IUnitOfWork unit;
-        private readonly MestoMapper mapper;
-        private readonly MestoValidator validator;
+        private readonly Mapper mapper;
+        //private readonly MestoValidator validator;
 
         public MestoService(IUnitOfWork unit)
         {
             this.unit = unit;
-            this.mapper = new MestoMapper();
-            this.validator = new MestoValidator();
+            this.mapper = new Mapper();
+            //this.validator = new MestoValidator();
         }
 
         public void DeleteById(long id)
         {
             Mesto mesto = unit.MestoRepository.Get(id);
-            validator.ValidateNullOrEmpty(mesto);
+            //validator.ValidateNullOrEmpty(mesto);
 
             unit.MestoRepository.Delete(mesto);
             unit.SaveChanges();
@@ -41,7 +39,7 @@ namespace ApplicationLayer.Implementation
 
             mesta.ForEach(m =>
             {
-                mestaDTO.Add(mapper.EntityToDto(m));
+                mestaDTO.Add(mapper.MestoToDto(m));
             });
 
             return mestaDTO;
@@ -50,17 +48,17 @@ namespace ApplicationLayer.Implementation
         public MestoDTO GetById(long id)
         {
             Mesto mesto = unit.MestoRepository.Get(id);
-            validator.ValidateNullOrEmpty(mesto);
+            //validator.ValidateNullOrEmpty(mesto);
 
-            return mapper.EntityToDto(mesto);
+            return mapper.MestoToDto(mesto);
         }
 
         public MestoDTO Save(MestoDTO dto)
         {
-            validator.ValidateNullOrEmpty(dto);
-            validator.ValidateForSave(dto);
+            //validator.ValidateNullOrEmpty(dto);
+            //validator.ValidateForSave(dto);
 
-            Mesto mesto = mapper.DtoToEntity(dto);
+            Mesto mesto = mapper.DtoToMesto(dto);
             unit.MestoRepository.Add(mesto);
             unit.SaveChanges();
 
@@ -70,10 +68,10 @@ namespace ApplicationLayer.Implementation
         public MestoDTO UpdateById(long id, MestoDTO dto)
         {
             Mesto mesto = unit.MestoRepository.Get(id);
-            validator.ValidateNullOrEmpty(mesto);
+            //validator.ValidateNullOrEmpty(mesto);
 
-            validator.ValidateNullOrEmpty(dto);
-            validator.ValidateForSave(dto);
+            //validator.ValidateNullOrEmpty(dto);
+            //validator.ValidateForSave(dto);
 
             mesto.Naziv = dto.Naziv;
             mesto.BrojStanovnika = dto.BrojStanovnika;

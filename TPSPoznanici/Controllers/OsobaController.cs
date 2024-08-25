@@ -1,5 +1,5 @@
-﻿using ApplicationLayer.Interfaces;
-using DTO;
+﻿using ApplicationLayer.DTO;
+using ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TPSPoznanici.Controllers

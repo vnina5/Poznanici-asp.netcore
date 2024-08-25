@@ -1157,30 +1157,13 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Common": "1.0.0",
-          "DTO": "1.0.0",
-          "DataAccessLayer": "1.0.0",
-          "Mapper": "1.0.0"
+          "DataAccessLayer": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ApplicationLayer.dll": {}
         },
         "runtime": {
           "bin/placeholder/ApplicationLayer.dll": {}
-        }
-      },
-      "Common/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "DTO": "1.0.0",
-          "Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Common.dll": {}
         }
       },
       "DataAccessLayer/1.0.0": {
@@ -1209,30 +1192,6 @@
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
-        }
-      },
-      "DTO/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/DTO.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DTO.dll": {}
-        }
-      },
-      "Mapper/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "DTO": "1.0.0",
-          "Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Mapper.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Mapper.dll": {}
         }
       }
     }
@@ -3819,11 +3778,6 @@
       "path": "../ApplicationLayer/ApplicationLayer.csproj",
       "msbuildProject": "../ApplicationLayer/ApplicationLayer.csproj"
     },
-    "Common/1.0.0": {
-      "type": "project",
-      "path": "../Common/Common.csproj",
-      "msbuildProject": "../Common/Common.csproj"
-    },
     "DataAccessLayer/1.0.0": {
       "type": "project",
       "path": "../DataAccessLayer/DataAccessLayer.csproj",
@@ -3833,16 +3787,6 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
-    },
-    "DTO/1.0.0": {
-      "type": "project",
-      "path": "../DTO/DTO.csproj",
-      "msbuildProject": "../DTO/DTO.csproj"
-    },
-    "Mapper/1.0.0": {
-      "type": "project",
-      "path": "../Mapper/Mapper.csproj",
-      "msbuildProject": "../Mapper/Mapper.csproj"
     }
   },
   "projectFileDependencyGroups": {

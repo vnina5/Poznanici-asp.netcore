@@ -1,6 +1,5 @@
 ﻿using Common.Exceptions;
 using Domain.Entity;
-using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,7 @@ namespace Common.Validators
 {
     public class OsobaValidator
     {
+        private OsobaDTO osoba;
         //private Osoba osoba;
         //public OsobaValidator(Osoba osoba) 
         //{
