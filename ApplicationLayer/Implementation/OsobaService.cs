@@ -23,6 +23,7 @@ namespace ApplicationLayer.Implementation
 
         public OsobaService(IUnitOfWork unit)
         {
+            //DEPENDENCY INJECTION
             this.unit = unit;
             this.mapper = new OsobaMapper();
             this.mestoMapper = new MestoMapper();
