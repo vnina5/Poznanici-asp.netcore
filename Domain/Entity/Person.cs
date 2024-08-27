@@ -51,7 +51,7 @@ namespace Domain.Entity
             int? ageInMonths = null;
             if (DateOfBirth.HasValue)
             {
-                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                 DateOnly dateOfBirth = DateOfBirth.Value;
                 ageInMonths = (currentDate.Year - dateOfBirth.Year) * 12 + (currentDate.Month - dateOfBirth.Month);
                 if (currentDate.Day < dateOfBirth.Day) ageInMonths--;

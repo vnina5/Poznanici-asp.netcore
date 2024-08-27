@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddDbContext<MyContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("base"));
@@ -32,6 +33,7 @@ builder.Services.AddCors(options =>
                     .AllowAnyMethod();
         });
 });
+
 var app = builder.Build();
 
 app.UseCors(p =>
