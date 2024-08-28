@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.DTO;
 using ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace TPSPoznanici.Controllers
 {
@@ -9,10 +10,12 @@ namespace TPSPoznanici.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityService _cityService;
+        private readonly ILogger<CityController> _logger;
 
-        public CityController(ICityService cityService)
+        public CityController(ICityService cityService, ILogger<CityController> logger)
         {
-            this._cityService = cityService;
+            _cityService = cityService;
+            _logger = logger;
         }
 
 
@@ -20,14 +23,13 @@ namespace TPSPoznanici.Controllers
         [Route("")]
         public IActionResult GetAll()
         {
-            try
+            List<CityDTO> cities = _cityService.GetAll();
+            if (cities.IsNullOrEmpty())
             {
-                return Ok(_cityService.GetAll());
+                return NotFound("Cities do not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(cities);
         }
 
 
@@ -35,14 +37,13 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult Get([FromRoute] int id)
         {
-            try
+            CityDTO city = _cityService.GetById(id);
+            if (city == null)
             {
-                return Ok(_cityService.GetById(id));
+                return NotFound($"City with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(city);
         }
 
 
@@ -50,14 +51,8 @@ namespace TPSPoznanici.Controllers
         [Route("")]
         public IActionResult Save([FromBody] CityDTO dto)
         {
-            try
-            {
-                return Ok(_cityService.Save(dto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            CityDTO response = _cityService.Save(dto);
+            return Ok(response);
         }
 
 
@@ -65,14 +60,14 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult UpdateById([FromRoute] int id, [FromBody] CityDTO dto)
         {
-            try
+            CityDTO city = _cityService.GetById(id);
+            if (city == null)
             {
-                return Ok(_cityService.UpdateById(id, dto));
+                return NotFound($"City with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            CityDTO response = _cityService.UpdateById(id, dto);
+            return Ok(response);
         }
 
 
@@ -80,15 +75,14 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult DeleteById([FromRoute] int id)
         {
-            try
+            CityDTO city = _cityService.GetById(id);
+            if (city == null)
             {
-                _cityService.DeleteById(id);
-                return Ok();
+                return NotFound($"City with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            _cityService.DeleteById(id);
+            return Ok();
         }
 
 

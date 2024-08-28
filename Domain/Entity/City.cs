@@ -14,6 +14,8 @@ namespace Domain.Entity
         public int? NumberOfCitizens { get; set; }
 
 
+        public City() { }
+
         public City(int zipCode, string name, int? numberOfCitizens = null)
         {
             ZipCode = zipCode;

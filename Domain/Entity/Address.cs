@@ -19,6 +19,8 @@ namespace Domain.Entity
         [ForeignKey("HomeTypeId")]
         public HomeType HomeType { get; set; }
 
+        public Address() { }
+
         public Address(string street,int number, int cityId, int homeTypeId, int? floor = null) 
         {
             Street = street;

@@ -45,12 +45,12 @@ namespace DataAccessLayer.Implementation
 
         public int GetMaxHeight()
         {
-            return _context.Database.SqlQuery<int>($"SELECT dbo.fnMaxVisina()").AsEnumerable().FirstOrDefault();
+            return _context.Database.SqlQuery<int>($"SELECT dbo.fnMaxHeight()").AsEnumerable().FirstOrDefault();
         }
 
         public int GetAverageAge()
         {
-            return _context.Database.SqlQuery<int>($"SELECT dbo.fnSrednjaStarost()").AsEnumerable().FirstOrDefault();
+            return _context.Database.SqlQuery<int>($"SELECT dbo.fnAverageAge()").AsEnumerable().FirstOrDefault();
         }
 
 

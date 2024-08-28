@@ -5,7 +5,7 @@ namespace ApplicationLayer.Validators
 {
     public class PersonValidator : AbstractValidator<PersonDTO>
     {
-        private static readonly DateOnly MinAllowedDateOfBirth = new DateOnly(1920, 1, 1);
+        private static readonly DateTime MinAllowedDateOfBirth = new DateTime(1920, 1, 1);
         private const int MinAllowedHeight = 50;
         private const int MAxAllowedHeight = 250;
 
@@ -27,7 +27,7 @@ namespace ApplicationLayer.Validators
             
             RuleFor(dto => dto.DateOfBirth)
                 .GreaterThanOrEqualTo(MinAllowedDateOfBirth)
-                .LessThanOrEqualTo(DateOnly.FromDateTime(DateTime.Today))
+                .LessThanOrEqualTo(DateTime.Today)
                 .WithMessage("Date of birth must not be earlier than 01/01/1920 and must not be in the future.");
            
             RuleFor(dto => dto.Height)
@@ -35,7 +35,7 @@ namespace ApplicationLayer.Validators
             
         }
 
-        private bool BeAValidJMBG(int jmbg)
+        private bool BeAValidJMBG(long jmbg)
         {
             return JMBGValidator.ValidateJMBG(jmbg);
         }

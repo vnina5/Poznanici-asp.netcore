@@ -12,9 +12,9 @@ namespace Domain.Entity
 
         public string LastName { get; set; }
 
-        public int JMBG { get; set; }
+        public long JMBG { get; set; }
 
-        public DateOnly? DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public int? AgeInMonths { 
             get { return CalculateAgeInMonths(); } 
@@ -34,7 +34,9 @@ namespace Domain.Entity
         public virtual Address Address { get; set; }
 
 
-        public Person(string firstName, string lastName, int jmbg, int cityOfBirthId, int addressId, DateOnly? dateOfBirth = null, int? height = null)
+        public Person() { }
+
+        public Person(string firstName, string lastName, long jmbg, DateTime? dateOfBirth, int? height, int cityOfBirthId, int addressId)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -51,8 +53,8 @@ namespace Domain.Entity
             int? ageInMonths = null;
             if (DateOfBirth.HasValue)
             {
-                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
-                DateOnly dateOfBirth = DateOfBirth.Value;
+                DateTime currentDate = DateTime.Today;
+                DateTime dateOfBirth = DateOfBirth.Value;
                 ageInMonths = (currentDate.Year - dateOfBirth.Year) * 12 + (currentDate.Month - dateOfBirth.Month);
                 if (currentDate.Day < dateOfBirth.Day) ageInMonths--;
                 

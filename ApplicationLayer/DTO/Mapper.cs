@@ -8,7 +8,7 @@ namespace ApplicationLayer.DTO
 
         public Person DtoToPerson(PersonDTO dto)
         {
-            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddressId, dto.DateOfBirth, dto.Height);
+            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.DateOfBirth, dto.Height, dto.CityOfBirthId, dto.AddressId);
         }
 
         public PersonDTO PersonToDto(Person person)
@@ -61,7 +61,7 @@ namespace ApplicationLayer.DTO
 
         public Person DtoToPersonAddress(PersonAddressDTO dto)
         {
-            Person person = new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.CityOfBirthId, dto.AddressId, dto.DateOfBirth, dto.Height);
+            Person person = new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.DateOfBirth, dto.Height, dto.CityOfBirthId, dto.AddressId);
             Address address = new Address(dto.AddressStreet, dto.AddressNumber, dto.AddressCityId, dto.HomeTypeId, dto.AddressFloor);
             person.Address = address;
             return person;

@@ -10,8 +10,8 @@ namespace ApplicationLayer.DTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int JMBG { get; set; }
-        public DateOnly? DateOfBirth { get; set; }
+        public long JMBG { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public int? AgeInMonths { get; set; }
         public int? Height { get; set; }
 

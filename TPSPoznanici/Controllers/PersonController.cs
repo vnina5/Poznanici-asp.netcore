@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.DTO;
 using ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace TPSPoznanici.Controllers
 {
@@ -10,12 +11,12 @@ namespace TPSPoznanici.Controllers
     {
         private readonly IPersonService _personService;
 
-        //private readonly ILogger<OsobaController> _logger;
+        private readonly ILogger<PersonController> _logger;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, ILogger<PersonController> logger)
         {
-            this._personService = personService;
-            //this._logger = _logger;
+            _personService = personService;
+            _logger = logger;
         }
 
 
@@ -23,14 +24,13 @@ namespace TPSPoznanici.Controllers
         [Route("")]
         public IActionResult GetAll()
         {
-            try
+            List<PersonDTO> persons = _personService.GetAll();
+            if (persons.IsNullOrEmpty())
             {
-                return Ok(_personService.GetAll());
+                return NotFound("Persons do not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(persons);
         }
 
 
@@ -38,14 +38,13 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            try
+            PersonDTO person = _personService.GetById(id);
+            if (person == null)
             {
-                return Ok(_personService.GetById(id));
+                return NotFound($"Person with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(person);
         }
 
 
@@ -53,14 +52,8 @@ namespace TPSPoznanici.Controllers
         [Route("")]
         public IActionResult Save([FromBody] PersonDTO dto)
         {
-            try
-            {
-                return Ok(_personService.Save(dto));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            PersonDTO response = _personService.Save(dto);
+            return Ok(response);
         }
 
 
@@ -68,14 +61,14 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult Update([FromRoute] int id, [FromBody] PersonDTO dto)
         {
-            try
+            PersonDTO person = _personService.GetById(id);
+            if (person == null)
             {
-                return Ok(_personService.UpdateById(id, dto));
+                return NotFound($"Person with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            PersonDTO response = _personService.UpdateById(id, dto);
+            return Ok(response);
         }
 
 
@@ -83,15 +76,14 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            try
+            PersonDTO person = _personService.GetById(id);
+            if (person == null)
             {
-                _personService.DeleteById(id);
-                return Ok();
+                return NotFound($"Person with id {id} does not exist.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            _personService.DeleteById(id);
+            return Ok();
         }
 
 
@@ -101,14 +93,8 @@ namespace TPSPoznanici.Controllers
         [Route("maxHeight")]
         public IActionResult GetMaxVisina()
         {
-            try
-            {
-                return Ok(_personService.GetMaxHeight());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            int response = _personService.GetMaxHeight();
+            return Ok(response);
         }
 
 
@@ -116,14 +102,8 @@ namespace TPSPoznanici.Controllers
         [Route("averageAge")]
         public IActionResult GetSrednjaStarost()
         {
-            try
-            {
-                return Ok(_personService.GetAverageAge());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            int response = _personService.GetAverageAge();
+            return Ok(response);
         }
 
 
@@ -133,14 +113,13 @@ namespace TPSPoznanici.Controllers
         [Route("adults")]
         public IActionResult GetAllPunoletni()
         {
-            try
+            List<PersonDTO> persons = _personService.GetAllAdults();
+            if (persons.IsNullOrEmpty())
             {
-                return Ok(_personService.GetAllAdults());
+                return NotFound("There are no adults.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(persons);           
         }
 
 
@@ -148,14 +127,13 @@ namespace TPSPoznanici.Controllers
         [Route("fromSmederevo")]
         public IActionResult GetAllSmederevci()
         {
-            try
+            List<PersonDTO> persons = _personService.GetAllFromSmederevo();
+            if (persons.IsNullOrEmpty())
             {
-                return Ok(_personService.GetAllFromSmederevo());
+                return NotFound("There are no persons from Smederevo.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            return Ok(persons);
         }
 
 

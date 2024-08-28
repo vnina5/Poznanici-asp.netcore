@@ -1,13 +1,24 @@
-﻿namespace ApplicationLayer.Validators
+﻿using DataAccessLayer.UnitOfWork;
+
+namespace ApplicationLayer.Validators
 {
     public class JMBGValidator
     {
-        public static bool ValidateJMBG(int jmbg)
+        private readonly IUnitOfWork _unitOfWork;
+        public JMBGValidator(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public static bool ValidateJMBG(long jmbg)
         {
             string jmbgStr = jmbg.ToString("D13");
 
             if (jmbgStr.Length != 13)
                 return false;
+
+            //if(IsExist(jmbg))
+            //    return false;
 
             string dd = jmbgStr.Substring(0, 2); //dan
             string mm = jmbgStr.Substring(2, 2); //mesec
@@ -50,6 +61,12 @@
                 l = 0;
 
             return l;
+        }
+
+        private static bool IsExist(long jmbg)
+        {
+
+            return true;
         }
     }
 }
