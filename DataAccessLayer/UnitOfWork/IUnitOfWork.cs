@@ -1,16 +1,13 @@
 ﻿using DataAccessLayer.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        public IOsobaRepository OsobaRepository { get; set; }
-        public IMestoRepository MestoRepository { get; set; }
+        public IPersonRepository PersonRepository { get; set; }
+        public ICityRepository CityRepository { get; set; }
+        public IAddressRepository AddressRepository { get; set; }
+        public IHomeTypeRepository HomeTypeRepository { get; set; }
 
         public void SaveChanges();
     }

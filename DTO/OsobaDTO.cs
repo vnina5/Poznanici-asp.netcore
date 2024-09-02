@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class OsobaDTO : IDTO
+    public class OsobaDTO
     {
-        //public long Id { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
-        public string JMBG { get; set; }
-        public DateTime DatumRodjenja { get; set; }
+        public int JMBG { get; set; }
+        public DateOnly DatumRodjenja { get; set; }
         public int Starost { get; set;  }
         public int Visina { get; set; }
 
         public long MestoRodjenjaId { get; set; }
-        //public MestoDTO MestoRodjenjaDTO { get; set; }
 
         public long PrebivalisteId { get; set; }
-        //public MestoDTO PrebivalisteDTO { get; set; }
     }
 }

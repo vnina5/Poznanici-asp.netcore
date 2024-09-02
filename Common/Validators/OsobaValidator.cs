@@ -1,6 +1,5 @@
 ﻿using Common.Exceptions;
 using Domain.Entity;
-using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +12,14 @@ namespace Common.Validators
 {
     public class OsobaValidator
     {
+        private OsobaDTO osoba;
         //private Osoba osoba;
         //public OsobaValidator(Osoba osoba) 
         //{
         //    this.osoba = osoba;
         //}
 
-        public void ValidateNullOrEmpty(Osoba osoba)
+        public void ValidateNullOrEmpty(Person osoba)
         {
             if (osoba == null) throw new NotFoundException("Osoba nije pronadjena.");
         }
@@ -29,7 +29,7 @@ namespace Common.Validators
             if (osoba == null) throw new NotFoundException("Niste uneli podatke o osobi.");
         }
 
-        public void ValidateNullOrEmptyList(List<Osoba> osobaList)
+        public void ValidateNullOrEmptyList(List<Person> osobaList)
         {
             if (osobaList == null) throw new NotFoundException("Lista osoba je prazna");
         }
