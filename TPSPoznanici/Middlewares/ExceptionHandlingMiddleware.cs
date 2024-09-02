@@ -52,6 +52,7 @@ namespace TPSPoznanici.Middlewares
                 case KeyNotFoundException:
                     problemDetails.Status = StatusCodes.Status404NotFound;
                     problemDetails.Title = "Not found error.";
+                    problemDetails.Detail = exception.Message;
                     break;
                 default:
                     problemDetails.Status = StatusCodes.Status500InternalServerError;

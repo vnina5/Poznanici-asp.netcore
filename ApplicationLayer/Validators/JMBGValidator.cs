@@ -1,15 +1,11 @@
 ﻿using DataAccessLayer.UnitOfWork;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace ApplicationLayer.Validators
 {
     public class JMBGValidator
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public JMBGValidator(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public static bool ValidateJMBG(long jmbg)
         {
             string jmbgStr = jmbg.ToString("D13");
@@ -28,8 +24,21 @@ namespace ApplicationLayer.Validators
             string k = jmbgStr.Substring(12, 1); //kontrolna cifra
 
 
-            if (!DateOnly.TryParse($"{yyy}-{mm}-{dd}", out DateOnly dateOfBirth))
+            if (jmbgStr[4] == '0')
+            {
+                if (!DateTime.TryParse($"2{yyy}-{mm}-{dd}", out DateTime dateOfBirth))
+                    return false;
+            }
+            else if (jmbgStr[4] == '9')
+            {
+                if (!DateTime.TryParse($"1{yyy}-{mm}-{dd}", out DateTime dateOfBirth))
+                    return false;
+            }
+            else
+            {
                 return false;
+            }
+
 
             int regionCode = int.Parse(rr);
             if (regionCode < 0 || regionCode > 99) 
@@ -44,21 +53,18 @@ namespace ApplicationLayer.Validators
             if (controlNum != l)
                 return false;
 
-
             return true;
         }
 
         private static int CalculateControlNumber(string jmbgStrWithoutK)
         {
-            
             int[] x = jmbgStrWithoutK.Select(d => int.Parse(d.ToString())).ToArray();
 
             int sum = 7 * (x[0] + x[6]) + 6 * (x[1] + x[7]) + 5 * (x[2] + x[8]) + 4 * (x[3] + x[9]) + 3 * (x[4] + x[10]) + 2 * (x[4] + x[11]);
 
             int l = 11 - (sum % 11);
 
-            if (l > 9)
-                l = 0;
+            if (l > 9) l = 0;
 
             return l;
         }

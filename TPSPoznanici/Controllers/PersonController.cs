@@ -11,12 +11,9 @@ namespace TPSPoznanici.Controllers
     {
         private readonly IPersonService _personService;
 
-        private readonly ILogger<PersonController> _logger;
-
-        public PersonController(IPersonService personService, ILogger<PersonController> logger)
+        public PersonController(IPersonService personService)
         {
             _personService = personService;
-            _logger = logger;
         }
 
 

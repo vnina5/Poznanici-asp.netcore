@@ -19,7 +19,6 @@ namespace ApplicationLayer.Implementation
         public void DeleteById(int id)
         {
             Person person = _unit.PersonRepository.Get(id);
-            //validator.ValidateNullOrEmpty(osoba);
 
             _unit.PersonRepository.Delete(person);
             _unit.SaveChanges();
@@ -28,7 +27,6 @@ namespace ApplicationLayer.Implementation
         public List<PersonDTO> GetAll()
         {
             List<Person> persons = _unit.PersonRepository.GetAll();
-            //validator.ValidateNullOrEmptyList(osobe);
 
             List<PersonDTO> personsDTO = new List<PersonDTO>();
             persons.ForEach(p =>
@@ -42,7 +40,10 @@ namespace ApplicationLayer.Implementation
         public PersonDTO GetById(int id)
         {
             Person person = _unit.PersonRepository.Get(id);
-            //validator.ValidateNullOrEmpty(osoba);
+            if (person == null)
+            {
+                return null;
+            }
 
             PersonDTO personDTO = _mapper.PersonToDto(person);
             return personDTO;
@@ -62,9 +63,16 @@ namespace ApplicationLayer.Implementation
         public PersonDTO Save(PersonDTO dto)
         {            
             City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
+            if (cityOfBirth == null)
+            {
+                throw new KeyNotFoundException($"City of birth with id {dto.CityOfBirthId} not found.");
+            }
+
             Address addres = _unit.AddressRepository.Get(dto.AddressId);
-            //mestoValidator.ValidateNullOrEmpty(mestoRodjenja);
-            //mestoValidator.ValidateNullOrEmpty(addres);
+            if (addres == null)
+            {
+                throw new KeyNotFoundException($"Address with id {dto.AddressId} not found.");
+            }
 
             Person person = _mapper.DtoToPerson(dto);
             _unit.PersonRepository.Add(person);
@@ -93,12 +101,19 @@ namespace ApplicationLayer.Implementation
 
         public PersonDTO UpdateById(int id, PersonDTO dto)
         {
-            Person person = _unit.PersonRepository.Get(id);
-            //validator.ValidateNullOrEmpty(osoba);
+            City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
+            if (cityOfBirth == null)
+            {
+                throw new KeyNotFoundException($"City of birth with id {dto.CityOfBirthId} not found.");
+            }
 
-            //Address addres = _unit.MestoRepository.Get(dto.AddressId);
-            //person.AddressId = dto.AddressId;
-            //person.Address = addres;
+            Address addres = _unit.AddressRepository.Get(dto.AddressId);
+            if (addres == null)
+            {
+                throw new KeyNotFoundException($"Address with id {dto.AddressId} not found.");
+            }
+
+            Person person = _mapper.DtoToPerson(dto);
 
             _unit.PersonRepository.Update(person);
             _unit.SaveChanges();

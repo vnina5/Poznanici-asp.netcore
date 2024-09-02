@@ -10,12 +10,10 @@ namespace TPSPoznanici.Controllers
     public class CityController : ControllerBase
     {
         private readonly ICityService _cityService;
-        private readonly ILogger<CityController> _logger;
 
-        public CityController(ICityService cityService, ILogger<CityController> logger)
+        public CityController(ICityService cityService)
         {
             _cityService = cityService;
-            _logger = logger;
         }
 
 
