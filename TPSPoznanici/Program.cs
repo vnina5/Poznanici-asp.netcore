@@ -17,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers()
                 .AddFluentValidation();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICityService, CityService>();
@@ -25,8 +26,10 @@ builder.Services.AddScoped<Mapper>();
 
 builder.Services.AddScoped<IValidator<PersonDTO>, PersonValidator>();
 builder.Services.AddScoped<IValidator<CityDTO>, CityValidator>();
+builder.Services.AddScoped<IValidator<AddressDTO>, AddressValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CityValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AddressValidator>();
 
 
 builder.Services.AddDbContext<MyContext>(options =>

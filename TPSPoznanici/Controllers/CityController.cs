@@ -58,13 +58,23 @@ namespace TPSPoznanici.Controllers
         [Route("{id}")]
         public IActionResult UpdateById([FromRoute] int id, [FromBody] CityDTO dto)
         {
-            CityDTO city = _cityService.GetById(id);
-            if (city == null)
+            CityDTO response = _cityService.UpdateById(id, dto);
+            if (response == null)
             {
                 return NotFound($"City with id {id} does not exist.");
             }
+            return Ok(response);
+        }
 
+        [HttpPatch]
+        [Route("{id}")]
+        public IActionResult UpdateByIdPatch([FromRoute] int id, [FromBody] CityDTO dto)
+        {
             CityDTO response = _cityService.UpdateById(id, dto);
+            if (response == null)
+            {
+                return NotFound($"City with id {id} does not exist.");
+            }
             return Ok(response);
         }
 

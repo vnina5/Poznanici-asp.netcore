@@ -2,6 +2,7 @@
 using ApplicationLayer.Interfaces;
 using DataAccessLayer.UnitOfWork;
 using Domain.Entity;
+using System;
 
 namespace ApplicationLayer.Implementation
 {
@@ -19,7 +20,6 @@ namespace ApplicationLayer.Implementation
         public void DeleteById(int id)
         {
             City city = _unit.CityRepository.Get(id);
-            //validator.ValidateNullOrEmpty(mesto);
 
             _unit.CityRepository.Delete(city);
             _unit.SaveChanges();
@@ -41,7 +41,10 @@ namespace ApplicationLayer.Implementation
         public CityDTO GetById(int id)
         {
             City city = _unit.CityRepository.Get(id);
-            //validator.ValidateNullOrEmpty(mesto);
+            if (city == null)
+            {
+                return null;
+            }
 
             return _mapper.CityToDto(city);
         }
@@ -58,15 +61,28 @@ namespace ApplicationLayer.Implementation
         public CityDTO UpdateById(int id, CityDTO dto)
         {
             City city = _unit.CityRepository.Get(id);
-            //validator.ValidateNullOrEmpty(mesto);
+            if (city == null)
+            {
+                return null;
+            }
 
-            city.Name = dto.Name;
-            city.NumberOfCitizens = dto.NumberOfCitizens;
+            if (dto.Name != null)
+            {
+                city.Name = dto.Name;
+            }
+            if (dto.ZipCode != 0)
+            {
+                city.ZipCode = dto.ZipCode;
+            }
+            if (dto.NumberOfCitizens != null)
+            {
+                city.NumberOfCitizens = dto.NumberOfCitizens;
+            }
 
             _unit.CityRepository.Update(city);
             _unit.SaveChanges();
 
-            return dto;
+            return _mapper.CityToDto(city);
         }
     }
 }

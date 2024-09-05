@@ -101,6 +101,12 @@ namespace ApplicationLayer.Implementation
 
         public PersonDTO UpdateById(int id, PersonDTO dto)
         {
+            Person person = _unit.PersonRepository.Get(id);
+            if (person == null)
+            {
+                return null;
+            }
+
             City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
             if (cityOfBirth == null)
             {
@@ -113,7 +119,8 @@ namespace ApplicationLayer.Implementation
                 throw new KeyNotFoundException($"Address with id {dto.AddressId} not found.");
             }
 
-            Person person = _mapper.DtoToPerson(dto);
+            Person personFromDto = _mapper.DtoToPerson(dto);
+            person = personFromDto;
 
             _unit.PersonRepository.Update(person);
             _unit.SaveChanges();
