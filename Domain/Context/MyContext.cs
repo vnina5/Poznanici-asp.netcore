@@ -17,6 +17,7 @@ namespace Domain.Context
         public DbSet<HomeType> HomeType { get; set; }
 
         public DbSet<Person> AdultView { get; set; }
+        public DbSet<Person> SmederevciView { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

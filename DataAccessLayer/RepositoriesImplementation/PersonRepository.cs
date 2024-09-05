@@ -63,8 +63,8 @@ namespace DataAccessLayer.Implementation
 
         public List<Person> GetAllFromSmederevo()
         {
-            //return context.Osobas.Include(o => o.MestoRodjenja).Include(o => o.Prebivaliste).ToList();
-            return _context.AdultView.ToList();
+            var query = "SELECT * FROM dbo.smederevciView";
+            return _context.SmederevciView.FromSqlRaw(query).ToList();
         }
 
     }

@@ -82,7 +82,10 @@ namespace Test.Controllers
             };
             _personServiceMock.Setup(service => service.Save(personDto)).Throws(new KeyNotFoundException("Not found error."));
 
-            Assert.ThrowsAny<Exception>(() => _personController.Save(personDto));
+            var result = _personController.Save(personDto);
+
+            var badResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal(400, badResult.StatusCode);
         }
 
 
