@@ -20,7 +20,7 @@ namespace ApplicationLayer.Validators
                 .Length(3, 50).WithMessage("Name must be between 3 and 50 characters.")
                 .Matches("^[А-ШA-Z][а-шa-zА-ШA-Z]*( [а-шa-zА-ШA-Z]+)*$").WithMessage("Name must start wiht a capital letter and contain Serbian Cyrillic or Latin letters.");
 
-            RuleFor(dto => dto.ZipCode)
+            RuleFor(dto => dto.PostCode)
                 .NotNull().NotEmpty().WithMessage("Please specify a zip code.")
                 .InclusiveBetween(10000, 99999).WithMessage("Zip code must contains exactly 5 digits.");
 

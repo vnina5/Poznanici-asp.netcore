@@ -75,7 +75,7 @@ namespace Test.Services
             Person person = new Person("Milica", "Milic", 1912000715000, new DateTime(2000, 12, 19), 163, 1, 3);
 
             _unitMock.Setup(unit => unit.CityRepository.Get(personDTO.CityOfBirthId)).Returns(new City { Id = 1 });
-            _unitMock.Setup(unit => unit.AddressRepository.Get(personDTO.AddressId)).Returns(new Address { Id = 3 });
+            _unitMock.Setup(unit => unit.HomeRepository.Get(personDTO.AddressId)).Returns(new Home { Id = 3 });
 
             _unitMock.Setup(unit => unit.PersonRepository.Add(person));
             _unitMock.Setup(unit => unit.SaveChanges());

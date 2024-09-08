@@ -70,9 +70,9 @@ namespace ApplicationLayer.Implementation
             {
                 city.Name = dto.Name;
             }
-            if (dto.ZipCode != 0)
+            if (dto.PostCode != 0)
             {
-                city.ZipCode = dto.ZipCode;
+                city.PostCode = dto.PostCode;
             }
             if (dto.NumberOfCitizens != null)
             {

@@ -26,19 +26,18 @@ namespace DataAccessLayer.Implementation
 
         public Person Get(int id)
         {
-            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Address).SingleOrDefault(o => o.Id == id);
+            return _context.Person.Include(p => p.CityOfBirth).Include(p => p.Residence).SingleOrDefault(p => p.Id == id);
             //return context.Osoba.Find(id);
         }
 
         public List<Person> GetAll()
         {
-            return _context.Person.Include(o => o.CityOfBirth).Include(o => o.Address).ToList();
+            return _context.Person.Include(p => p.CityOfBirth).Include(p => p.Residence).ToList();
             //return context.Osoba.ToList();
         }
 
         public void Update(Person entity)
         {
-            //proveriti da li postoji taj entity
             _context.Person.Update(entity);
         }
 

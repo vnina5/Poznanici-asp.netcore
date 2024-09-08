@@ -2,7 +2,7 @@
 {
     public class CityDTO
     {
-        public int ZipCode { get; set; }
+        public int PostCode { get; set; }
         public string? Name { get; set; }
         public int? NumberOfCitizens { get; set; }
     }

@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace ApplicationLayer.Validators
 {
-    public class AddressValidator : AbstractValidator<AddressDTO>
+    public class HomeValidator : AbstractValidator<HomeDTO>
     {
-        public AddressValidator()
+        public HomeValidator()
         {
             RuleFor(dto => dto.Street)
                 .NotNull().NotEmpty().WithMessage("Please specify a street name.")

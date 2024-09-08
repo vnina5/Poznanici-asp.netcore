@@ -7,7 +7,7 @@ namespace Domain.Entity
         [Key]
         public int Id { get; set; }
 
-        public int ZipCode { get; set; }
+        public int PostCode { get; set; }
 
         public string Name { get; set; }
 
@@ -16,9 +16,9 @@ namespace Domain.Entity
 
         public City() { }
 
-        public City(int zipCode, string name, int? numberOfCitizens = null)
+        public City(int postCode, string name, int? numberOfCitizens = null)
         {
-            ZipCode = zipCode;
+            PostCode = postCode;
             Name = name;
             NumberOfCitizens = numberOfCitizens;
         }

@@ -23,16 +23,16 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICityService, CityService>();
-builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<Mapper>();
 
 builder.Services.AddScoped<IValidator<PersonDTO>, PersonValidator>();
 builder.Services.AddScoped<IValidator<CityDTO>, CityValidator>();
-builder.Services.AddScoped<IValidator<AddressDTO>, AddressValidator>();
+builder.Services.AddScoped<IValidator<HomeDTO>, HomeValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<PersonValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CityValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<AddressValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<HomeValidator>();
 
 
 builder.Services.AddDbContext<MyContext>(options =>

@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace TPSPoznanici.Controllers
 {
-    [Route("friends/")]
+    [Route("persons/")]
     [ApiController]
     public class PersonController : ControllerBase
     {

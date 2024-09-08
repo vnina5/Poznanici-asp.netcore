@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IAddressRepository : IRepository<Address>
+    public interface IHomeRepository : IRepository<Home>
     {
 
     }

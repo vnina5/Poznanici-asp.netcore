@@ -8,9 +8,9 @@
         public DateTime? DateOfBirth { get; set; }
         public int? AgeInMonths { get; set;  }
         public int? Height { get; set; }
+        public string? Address { get; set; }
 
         public int CityOfBirthId { get; set; }
-
-        public int AddressId { get; set; }
+        public int ResidenceId { get; set; }
     }
 }

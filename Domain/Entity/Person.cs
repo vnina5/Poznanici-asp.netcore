@@ -23,28 +23,31 @@ namespace Domain.Entity
 
         public int? Height { get; set; }
 
+        public string? Address { get; set; }
+
 
         public int CityOfBirthId { get; set; }
         [ForeignKey("CityOfBirthId")]
         public virtual City CityOfBirth { get; set; }
 
 
-        public int AddressId { get; set; }
-        [ForeignKey("AddressId")]
-        public virtual Address Address { get; set; }
+        public int ResidenceId { get; set; }
+        [ForeignKey("ResidenceId")]
+        public virtual City Residence { get; set; }
 
 
         public Person() { }
 
-        public Person(string firstName, string lastName, long jmbg, DateTime? dateOfBirth, int? height, int cityOfBirthId, int addressId)
+        public Person(string firstName, string lastName, long jmbg, DateTime? dateOfBirth, int? height, string? address, int cityOfBirthId, int residenceId)
         {
             FirstName = firstName;
             LastName = lastName;
             JMBG = jmbg;
             DateOfBirth = dateOfBirth;
             Height = height;
+            Address = address;
             CityOfBirthId = cityOfBirthId;
-            AddressId = addressId;
+            ResidenceId = residenceId;
         }
 
 

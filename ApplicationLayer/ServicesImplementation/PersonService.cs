@@ -49,17 +49,6 @@ namespace ApplicationLayer.Implementation
             return personDTO;
         }
 
-        public PersonAddressDTO GetPersonAddressById(int id)
-        {
-            Person person = _unit.PersonRepository.Get(id);
-            person.Address = _unit.AddressRepository.Get(person.AddressId);
-            person.Address.HomeType = _unit.HomeTypeRepository.Get(person.Address.HomeTypeId);
-            //validator
-
-            PersonAddressDTO dto = _mapper.PersonAddressToDto(person);
-            return dto;
-        }
-
         public PersonDTO Save(PersonDTO dto)
         {            
             City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
@@ -68,32 +57,14 @@ namespace ApplicationLayer.Implementation
                 throw new KeyNotFoundException($"City of birth with id {dto.CityOfBirthId} not found.");
             }
 
-            Address addres = _unit.AddressRepository.Get(dto.AddressId);
-            if (addres == null)
+            City residence = _unit.CityRepository.Get(dto.ResidenceId);
+            if (residence == null)
             {
-                throw new KeyNotFoundException($"Address with id {dto.AddressId} not found.");
+                throw new KeyNotFoundException($"Residence city with id {dto.ResidenceId} not found.");
             }
 
             Person person = _mapper.DtoToPerson(dto);
             _unit.PersonRepository.Add(person);
-            _unit.SaveChanges();
-
-            return dto;
-        }
-
-        public PersonAddressDTO Save(PersonAddressDTO dto)
-        {
-            City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
-            Address addres = _unit.AddressRepository.Get(dto.AddressId);
-            //proverim da li postoji cityId
-            //proverim da li postoji addressId
-            //proverim da li je address(vraceni) == person.Address
-            //proverim da li postoji homeTypeId
-
-            Person person = _mapper.DtoToPersonAddress(dto);
-            _unit.PersonRepository.Add(person);
-            _unit.AddressRepository.Add(person.Address);
-            //cuva se person i address istovremeno pod transakcijom!!!
             _unit.SaveChanges();
 
             return dto;
@@ -113,10 +84,10 @@ namespace ApplicationLayer.Implementation
                 throw new KeyNotFoundException($"City of birth with id {dto.CityOfBirthId} not found.");
             }
 
-            Address addres = _unit.AddressRepository.Get(dto.AddressId);
-            if (addres == null)
+            City residence = _unit.CityRepository.Get(dto.ResidenceId);
+            if (residence == null)
             {
-                throw new KeyNotFoundException($"Address with id {dto.AddressId} not found.");
+                throw new KeyNotFoundException($"Residence city with id {dto.ResidenceId} not found.");
             }
 
             Person personFromDto = _mapper.DtoToPerson(dto);
@@ -127,11 +98,6 @@ namespace ApplicationLayer.Implementation
 
             PersonDTO personDTO = _mapper.PersonToDto(person);
             return personDTO;
-        }
-
-        public PersonAddressDTO Update(int id, PersonAddressDTO dto)
-        {
-            throw new NotImplementedException();
         }
 
 

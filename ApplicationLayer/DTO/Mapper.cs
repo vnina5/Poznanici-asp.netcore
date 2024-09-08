@@ -8,7 +8,7 @@ namespace ApplicationLayer.DTO
 
         public Person DtoToPerson(PersonDTO dto)
         {
-            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.DateOfBirth, dto.Height, dto.CityOfBirthId, dto.AddressId);
+            return new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.DateOfBirth, dto.Height, dto.Address, dto.CityOfBirthId, dto.ResidenceId);
         }
 
         public PersonDTO PersonToDto(Person person)
@@ -21,14 +21,16 @@ namespace ApplicationLayer.DTO
                 DateOfBirth = person.DateOfBirth,
                 AgeInMonths = person.AgeInMonths,
                 Height = person.Height,
+                Address = person.Address,
                 CityOfBirthId = person.CityOfBirthId,
-                AddressId = person.AddressId,
+                ResidenceId = person.ResidenceId,
             };
         }
 
+
         public City DtoToCity(CityDTO dto)
         {
-            return new City(dto.ZipCode, dto.Name, dto.NumberOfCitizens);
+            return new City(dto.PostCode, dto.Name, dto.NumberOfCitizens);
         }
 
         public CityDTO CityToDto(City city)
@@ -36,55 +38,30 @@ namespace ApplicationLayer.DTO
             return new CityDTO
             {
                 Name = city.Name,
-                ZipCode = city.ZipCode,
+                PostCode = city.PostCode,
                 NumberOfCitizens = city.NumberOfCitizens,
             };
         }
 
-        public Address DtoToAddress(AddressDTO dto)
+
+        public Home DtoToHome(HomeDTO dto)
         {
-            return new Address(dto.Street, dto.Number, dto.CityId, dto.HomeTypeId, dto.Floor);
+            return new Home(dto.PersonId, dto.CityId, dto.Street, dto.Number, dto.HomeTypeId, dto.Floor);
         }
 
-        public AddressDTO AddressToDto(Address address)
+        public HomeDTO HomeToDto(Home home)
         {
-            return new AddressDTO
+            return new HomeDTO
             {
-                Street = address.Street,
-                Number = address.Number,
-                Floor = address.Floor,
-                CityId = address.CityId,
-                HomeTypeId = address.HomeTypeId,
-                HomeTypeName = address.HomeType.Name
-            };
-        }
-
-        public Person DtoToPersonAddress(PersonAddressDTO dto)
-        {
-            Person person = new Person(dto.FirstName, dto.LastName, dto.JMBG, dto.DateOfBirth, dto.Height, dto.CityOfBirthId, dto.AddressId);
-            Address address = new Address(dto.AddressStreet, dto.AddressNumber, dto.AddressCityId, dto.HomeTypeId, dto.AddressFloor);
-            person.Address = address;
-            return person;
-        }
-
-        public PersonAddressDTO PersonAddressToDto(Person person)
-        {
-            return new PersonAddressDTO
-            {
-                FirstName = person.FirstName,
-                LastName = person.LastName,
-                JMBG = person.JMBG,
-                DateOfBirth = person.DateOfBirth,
-                AgeInMonths = person.AgeInMonths,
-                Height = person.Height,
-                CityOfBirthId = person.CityOfBirthId,
-                AddressId = person.AddressId,
-                AddressStreet = person.Address.Street,
-                AddressNumber = person.Address.Number,
-                AddressFloor = person.Address.Floor,
-                AddressCityId = person.Address.CityId,
-                HomeTypeId = person.Address.HomeTypeId,
-                HomeTypeName = person.Address.HomeType.Name
+                PersonId = home.PersonId,
+                PersonName = home.Person.FirstName + " " + home.Person.LastName,
+                CityId = home.CityId,
+                CityName = home.City.Name,
+                Street = home.Street,
+                Number = home.Number,
+                Floor = home.Floor,
+                HomeTypeId = home.HomeTypeId,
+                HomeTypeName = home.HomeType.Name
             };
         }
 

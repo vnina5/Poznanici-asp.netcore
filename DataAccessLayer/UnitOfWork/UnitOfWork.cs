@@ -9,7 +9,7 @@ namespace DataAccessLayer.UnitOfWork
         private readonly MyContext _context;
         public IPersonRepository PersonRepository { get; set; }
         public ICityRepository CityRepository { get; set; }
-        public IAddressRepository AddressRepository { get; set; }
+        public IHomeRepository HomeRepository { get; set; }
         public IHomeTypeRepository HomeTypeRepository { get; set; }
 
         public UnitOfWork(MyContext context)
@@ -17,7 +17,7 @@ namespace DataAccessLayer.UnitOfWork
             _context = context;
             this.PersonRepository = new PersonRepository(context);
             this.CityRepository = new CityRepository(context);
-            this.AddressRepository = new AddressRepository(context);
+            this.HomeRepository = new HomeRepository(context);
             this.HomeTypeRepository = new HomeTypeRepository(context);
         }
 

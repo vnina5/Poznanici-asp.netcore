@@ -32,7 +32,12 @@ namespace ApplicationLayer.Validators
            
             RuleFor(dto => dto.Height)
                 .InclusiveBetween(MinAllowedHeight, MAxAllowedHeight).WithMessage("Height must be between 50 and 250 cm.");
-            
+
+            RuleFor(dto => dto.Address)
+                .NotNull().NotEmpty().WithMessage("Please specify an address.")
+                .Length(3, 50).WithMessage("Address must be between 3 and 50 characters.")
+                .Matches("^[А-ШA-Z][а-шa-zА-ШA-Z]*( [а-шa-zА-ШA-Z0-9]+)*$").WithMessage("Address must start wiht a capital letter and contain Serbian Cyrillic or Latin letters and numbers.");
+
         }
 
         private bool BeAValidJMBG(long jmbg)
