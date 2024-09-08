@@ -10,6 +10,8 @@ using TPSPoznanici.Middlewares;
 using FluentValidation.AspNetCore;
 using Serilog;
 using Serilog.Events;
+using ApplicationLayer.Services;
+using ApplicationLayer.ServicesImplementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<Mapper>();
 
