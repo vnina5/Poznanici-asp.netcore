@@ -4,6 +4,7 @@ using ApplicationLayer.Interfaces;
 using DataAccessLayer.UnitOfWork;
 using Domain.Entity;
 using Moq;
+using System.Net;
 using TPSPoznanici.Controllers;
 
 namespace Test.Services
@@ -25,7 +26,7 @@ namespace Test.Services
         public void GetById_ReturnPersonDto_WhenPersonExists()
         {
             int id = 4;
-            Person person = new Person("Pera", "Peric", 1111000711110, new DateTime(2000, 11, 11), 190, 1, 3);
+            Person person = new Person("Pera", "Peric", 1111000711110, new DateTime(2000, 11, 11), 190, "Franje Krca 160", 1, 1);
             person.Id = id;
             PersonDTO personDTO = new PersonDTO
             {
@@ -35,8 +36,9 @@ namespace Test.Services
                 DateOfBirth = new DateTime(2000, 11, 11),
                 AgeInMonths = 285,
                 Height = 190,
+                Address = "Franje Krca 160",
                 CityOfBirthId = 1,
-                AddressId = 3
+                ResidenceId = 1
             };
 
             _unitMock.Setup(unit => unit.PersonRepository.Get(id)).Returns(person);
@@ -50,8 +52,9 @@ namespace Test.Services
             Assert.Equal(personDTO.DateOfBirth, result.DateOfBirth);
             Assert.Equal(personDTO.AgeInMonths, result.AgeInMonths);
             Assert.Equal(personDTO.Height, result.Height);
+            Assert.Equal(personDTO.Address, result.Address);
             Assert.Equal(personDTO.CityOfBirthId, result.CityOfBirthId);
-            Assert.Equal(personDTO.AddressId, result.AddressId);
+            Assert.Equal(personDTO.ResidenceId, result.ResidenceId);
             _unitMock.Verify(unit => unit.PersonRepository.Get(id), Times.Once);
         }
 
@@ -71,11 +74,11 @@ namespace Test.Services
         [Fact]
         public void Save_ReturnPersonDto_WhenPersonSavedSuccessfully()
         {
-            PersonDTO personDTO = new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715000, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, CityOfBirthId = 1, AddressId = 3 };
-            Person person = new Person("Milica", "Milic", 1912000715000, new DateTime(2000, 12, 19), 163, 1, 3);
+            PersonDTO personDTO = new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715000, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, Address = "Dalmatinska 33", CityOfBirthId = 3, ResidenceId = 1 };
+            Person person = new Person("Milica", "Milic", 1912000715000, new DateTime(2000, 12, 19), 163, "Dalmatinska 33", 1, 3);
 
-            _unitMock.Setup(unit => unit.CityRepository.Get(personDTO.CityOfBirthId)).Returns(new City { Id = 1 });
-            _unitMock.Setup(unit => unit.HomeRepository.Get(personDTO.AddressId)).Returns(new Home { Id = 3 });
+            _unitMock.Setup(unit => unit.CityRepository.Get(personDTO.CityOfBirthId)).Returns(new City { Id = 3 });
+            _unitMock.Setup(unit => unit.CityRepository.Get(personDTO.ResidenceId)).Returns(new City { Id = 1 });
 
             _unitMock.Setup(unit => unit.PersonRepository.Add(person));
             _unitMock.Setup(unit => unit.SaveChanges());
@@ -88,7 +91,7 @@ namespace Test.Services
         [Fact]
         public void Save_ReturnExeption_WhenCityOfBirthIdNotFound()
         {
-            PersonDTO personDTO = new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715061, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, CityOfBirthId = 111, AddressId = 3 };
+            PersonDTO personDTO = new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715061, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, Address = "Dalmatinska 33", CityOfBirthId = 111, ResidenceId = 3 };
             _unitMock.Setup(unit => unit.CityRepository.Get(personDTO.CityOfBirthId)).Returns((City)null);
 
             Assert.ThrowsAny<Exception>(() => _personService.Save(personDTO));

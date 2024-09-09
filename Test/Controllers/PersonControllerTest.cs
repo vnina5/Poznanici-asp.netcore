@@ -22,9 +22,9 @@ namespace Test.Controllers
         {
             List<PersonDTO> personList = new List<PersonDTO>()
             {
-                new PersonDTO { FirstName = "Marko", LastName = "Markovic", JMBG = 0101000710006, DateOfBirth = new DateTime(2000, 01, 01), Height = 188, CityOfBirthId = 1, AddressId = 3 },
-                new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715061, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, CityOfBirthId = 1, AddressId = 3 },
-                new PersonDTO { FirstName = "Mihailo", LastName = "Mihailovic", JMBG = 2911004710652, DateOfBirth = new DateTime(2004, 11, 29), Height = 193, CityOfBirthId = 1, AddressId = 3 },
+                new PersonDTO { FirstName = "Marko", LastName = "Markovic", JMBG = 0101000710006, DateOfBirth = new DateTime(2000, 01, 01), Height = 188, Address = "Jove Ilica 120", CityOfBirthId = 1, ResidenceId = 1 },
+                new PersonDTO { FirstName = "Milica", LastName = "Milic", JMBG = 1912000715061, DateOfBirth = new DateTime(2000, 12, 19), Height = 163, Address = "Vojvodjanska 53", CityOfBirthId = 2, ResidenceId = 2 },
+                new PersonDTO { FirstName = "Mihailo", LastName = "Mihailovic", JMBG = 2911004710652, DateOfBirth = new DateTime(2004, 11, 29), Height = 193, Address = "Dalmatinska 30", CityOfBirthId = 3, ResidenceId = 1 },
             };
             _personServiceMock.Setup(service => service.GetAll()).Returns(personList);
 
@@ -56,8 +56,9 @@ namespace Test.Controllers
                 JMBG = 0101000710006,
                 DateOfBirth = new DateTime(2000, 01, 01),
                 Height = 188,
+                Address = "Bulevar Nikole Tesle 160",
                 CityOfBirthId = 1,
-                AddressId = 3
+                ResidenceId = 1
             };
             _personServiceMock.Setup(service => service.Save(personDto)).Verifiable();
 
@@ -77,8 +78,9 @@ namespace Test.Controllers
                 JMBG = 1234567890123,
                 DateOfBirth = new DateTime(2000, 01, 01),
                 Height = 188,
+                Address = "Bulevar Nikole Tesle 160",
                 CityOfBirthId = 105,
-                AddressId = 3
+                ResidenceId = 3
             };
             _personServiceMock.Setup(service => service.Save(personDto)).Throws(new KeyNotFoundException("Not found error."));
 
