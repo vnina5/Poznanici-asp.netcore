@@ -4,7 +4,6 @@ namespace Test.Validation
 {
     public class JMBGValidatorTest
     {
-
         public JMBGValidatorTest()
         {
 
@@ -21,7 +20,7 @@ namespace Test.Validation
         }
 
         [Fact]
-        public void JMBGInvalidLenghth()
+        public void JMBGInvalidLength()
         {
             long jmbg = 1912000715;
 
