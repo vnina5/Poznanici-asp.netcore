@@ -52,6 +52,10 @@ namespace ApplicationLayer.Implementation
         public PersonAddressDTO GetPersonAddressById(int id)
         {
             Person person = _unit.PersonRepository.Get(id);
+            if (person == null)
+            {
+                return null;
+            }
             person.Address = _unit.AddressRepository.Get(person.AddressId);
             person.Address.HomeType = _unit.HomeTypeRepository.Get(person.Address.HomeTypeId);
             //validator
@@ -84,16 +88,27 @@ namespace ApplicationLayer.Implementation
         public PersonAddressDTO Save(PersonAddressDTO dto)
         {
             City cityOfBirth = _unit.CityRepository.Get(dto.CityOfBirthId);
-            Address addres = _unit.AddressRepository.Get(dto.AddressId);
-            //proverim da li postoji cityId
-            //proverim da li postoji addressId
-            //proverim da li je address(vraceni) == person.Address
-            //proverim da li postoji homeTypeId
+            if (cityOfBirth == null)
+            {
+                throw new KeyNotFoundException($"City of birth with id {dto.CityOfBirthId} not found.");
+            }
+
+            City addressCity = _unit.CityRepository.Get(dto.AddressCityId);
+            if (addressCity == null)
+            {
+                throw new KeyNotFoundException($"Address City with id {dto.AddressCityId} not found.");
+            }
+
+            HomeType homeType = _unit.HomeTypeRepository.Get(dto.HomeTypeId);
+            if (homeType == null)
+            {
+                throw new KeyNotFoundException($"Home type with id {dto.HomeTypeId} not found.");
+            }
 
             Person person = _mapper.DtoToPersonAddress(dto);
             _unit.PersonRepository.Add(person);
             _unit.AddressRepository.Add(person.Address);
-            //cuva se person i address istovremeno pod transakcijom!!!
+            //cuva se person i address istovremeno pod transakcijom
             _unit.SaveChanges();
 
             return dto;
