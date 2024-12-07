@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TPSPoznanici")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+882704052458b6c84289d83c1a1ef1b2211c85e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a9896df5f098ee0a82cfcbb5176b38c05758b1e")]
 [assembly: System.Reflection.AssemblyProductAttribute("TPSPoznanici")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TPSPoznanici")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
